@@ -1,0 +1,501 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jun 28 22:52:20 2017
+
+@author: kazuyuki
+"""
+
+"""
+kazuyuki@VISION:~$ pip install mecab
+Collecting mecab
+  Could not find a version that satisfies the requirement mecab (from versions: )
+No matching distribution found for mecab
+kazuyuki@VISION:~$ pip install mecab-python3
+Collecting mecab-python3
+  Downloading mecab-python3-0.7.tar.gz (41kB)
+    100% |████████████████████████████████| 51kB 308kB/s 
+    Complete output from command python setup.py egg_info:
+    /bin/sh: 1: mecab-config: not found
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/tmp/pip-build-2uwmr5bh/mecab-python3/setup.py", line 41, in <module>
+        include_dirs=cmd2("mecab-config --inc-dir"),
+      File "/tmp/pip-build-2uwmr5bh/mecab-python3/setup.py", line 21, in cmd2
+        return cmd1(strings).split()
+      File "/tmp/pip-build-2uwmr5bh/mecab-python3/setup.py", line 18, in cmd1
+        return os.popen(strings).readlines()[0][:-1]
+    IndexError: list index out of range
+    
+    ----------------------------------------
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-2uwmr5bh/mecab-python3/
+kazuyuki@VISION:~$ sudo
+usage: sudo -h | -K | -k | -V
+usage: sudo -v [-AknS] [-g group] [-h host] [-p prompt] [-u user]
+usage: sudo -l [-AknS] [-g group] [-h host] [-p prompt] [-U user] [-u user]
+            [command]
+usage: sudo [-AbEHknPS] [-r role] [-t type] [-C num] [-g group] [-h host] [-p
+            prompt] [-u user] [VAR=value] [-i|-s] [<command>]
+usage: sudo -e [-AknS] [-r role] [-t type] [-C num] [-g group] [-h host] [-p
+            prompt] [-u user] file ...
+kazuyuki@VISION:~$ sudo apt 
+[sudo] password for kazuyuki: 
+apt 1.2.15 (amd64)
+Usage: apt [options] command
+
+apt is a commandline package manager and provides commands for
+searching and managing as well as querying information about packages.
+It provides the same functionality as the specialized APT tools,
+like apt-get and apt-cache, but enables options more suitable for
+interactive use by default.
+
+Most used commands:
+  list - list packages based on package names
+  search - search in package descriptions
+  show - show package details
+  install - install packages
+  remove - remove packages
+  autoremove - Remove automatically all unused packages
+  update - update list of available packages
+  upgrade - upgrade the system by installing/upgrading packages
+  full-upgrade - upgrade the system by removing/installing/upgrading packages
+  edit-sources - edit the source information file
+
+See apt(8) for more information about the available commands.
+Configuration options and syntax is detailed in apt.conf(5).
+Information about how to configure sources can be found in sources.list(5).
+Package and version choices can be expressed via apt_preferences(5).
+Security details are available in apt-secure(8).
+                                        This APT has Super Cow Powers.
+kazuyuki@VISION:~$ sudo apt install mecab
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  libmecab2 mecab-jumandic mecab-utils
+The following NEW packages will be installed:
+  libmecab2 mecab mecab-jumandic mecab-utils
+0 upgraded, 4 newly installed, 0 to remove and 336 not upgraded.
+Need to get 13.3 MB of archives.
+After this operation, 81.4 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://jp.archive.ubuntu.com/ubuntu xenial/universe amd64 libmecab2 amd64 0.996-1.2ubuntu1 [264 kB]
+Get:2 http://jp.archive.ubuntu.com/ubuntu xenial/universe amd64 mecab-utils amd64 0.996-1.2ubuntu1 [4,566 B]
+Get:3 http://jp.archive.ubuntu.com/ubuntu xenial/universe amd64 mecab-jumandic all 5.1+20070304-3 [13.0 MB]
+Get:4 http://jp.archive.ubuntu.com/ubuntu xenial/universe amd64 mecab amd64 0.996-1.2ubuntu1 [83.2 kB]
+Fetched 13.3 MB in 23s (564 kB/s)                                              
+Selecting previously unselected package libmecab2.
+(Reading database ... 210144 files and directories currently installed.)
+Preparing to unpack .../libmecab2_0.996-1.2ubuntu1_amd64.deb ...
+Unpacking libmecab2 (0.996-1.2ubuntu1) ...
+Selecting previously unselected package mecab-utils.
+Preparing to unpack .../mecab-utils_0.996-1.2ubuntu1_amd64.deb ...
+Unpacking mecab-utils (0.996-1.2ubuntu1) ...
+Selecting previously unselected package mecab-jumandic.
+Preparing to unpack .../mecab-jumandic_5.1+20070304-3_all.deb ...
+Unpacking mecab-jumandic (5.1+20070304-3) ...
+Selecting previously unselected package mecab.
+Preparing to unpack .../mecab_0.996-1.2ubuntu1_amd64.deb ...
+Unpacking mecab (0.996-1.2ubuntu1) ...
+Processing triggers for libc-bin (2.23-0ubuntu9) ...
+Processing triggers for man-db (2.7.5-1) ...
+Setting up libmecab2 (0.996-1.2ubuntu1) ...
+Setting up mecab-utils (0.996-1.2ubuntu1) ...
+Setting up mecab-jumandic (5.1+20070304-3) ...
+Compiling Juman dictionary for Mecab.  This takes long time...
+reading /usr/share/mecab/dic/juman/unk.def ... 37
+emitting double-array: 100% |###########################################| 
+/usr/share/mecab/dic/juman/model.def is not found. skipped.
+reading /usr/share/mecab/dic/juman/Postp.csv ... 104
+reading /usr/share/mecab/dic/juman/Rengo.csv ... 913
+reading /usr/share/mecab/dic/juman/ContentW.csv ... 483161
+reading /usr/share/mecab/dic/juman/Noun.koyuu.csv ... 29805
+reading /usr/share/mecab/dic/juman/AuxV.csv ... 421
+reading /usr/share/mecab/dic/juman/Assert.csv ... 30
+reading /usr/share/mecab/dic/juman/Noun.keishiki.csv ... 10
+reading /usr/share/mecab/dic/juman/Noun.hukusi.csv ... 74
+reading /usr/share/mecab/dic/juman/Suffix.csv ... 1163
+reading /usr/share/mecab/dic/juman/Special.csv ... 124
+reading /usr/share/mecab/dic/juman/Demonstrative.csv ... 76
+reading /usr/share/mecab/dic/juman/Noun.suusi.csv ... 46
+reading /usr/share/mecab/dic/juman/Prefix.csv ... 75
+emitting double-array: 100% |###########################################| 
+reading /usr/share/mecab/dic/juman/matrix.def ... 1509x1509
+emitting matrix      : 100% |###########################################| 
+
+done!
+update-alternatives: using /var/lib/mecab/dic/juman to provide /var/lib/mecab/dic/debian (mecab-dictionary) in auto mode
+Setting up mecab (0.996-1.2ubuntu1) ...
+Compiling Juman dictionary for Mecab.  This takes long time...
+reading /usr/share/mecab/dic/juman/unk.def ... 37
+emitting double-array: 100% |###########################################| 
+/usr/share/mecab/dic/juman/model.def is not found. skipped.
+reading /usr/share/mecab/dic/juman/Postp.csv ... 104
+reading /usr/share/mecab/dic/juman/Rengo.csv ... 913
+reading /usr/share/mecab/dic/juman/ContentW.csv ... 483161
+reading /usr/share/mecab/dic/juman/Noun.koyuu.csv ... 29805
+reading /usr/share/mecab/dic/juman/AuxV.csv ... 421
+reading /usr/share/mecab/dic/juman/Assert.csv ... 30
+reading /usr/share/mecab/dic/juman/Noun.keishiki.csv ... 10
+reading /usr/share/mecab/dic/juman/Noun.hukusi.csv ... 74
+reading /usr/share/mecab/dic/juman/Suffix.csv ... 1163
+reading /usr/share/mecab/dic/juman/Special.csv ... 124
+reading /usr/share/mecab/dic/juman/Demonstrative.csv ... 76
+reading /usr/share/mecab/dic/juman/Noun.suusi.csv ... 46
+reading /usr/share/mecab/dic/juman/Prefix.csv ... 75
+emitting double-array: 100% |###########################################| 
+reading /usr/share/mecab/dic/juman/matrix.def ... 1509x1509
+emitting matrix      : 100% |###########################################| 
+
+done!
+Processing triggers for libc-bin (2.23-0ubuntu9) ...
+kazuyuki@VISION:~$ mecab
+asdf
+asdf	��,�ȿ�̾,*,*,*,*,*
+EOS
+私は猿です
+��	��,����̾��,*,*,��,����,��ɽɽ��:��
+�は��	�ü�,����,*,*,*,*,*
+��	��,��̾,*,*,*,*,*
+��す	�ü�,����,*,*,*,*,*
+EOS
+I'm girl
+I	��,�ȿ�̾,*,*,*,*,*
+'	�ü�,����,*,*,*,*,*
+m	��,�ȿ�̾,*,*,*,*,*
+girl	��,�ȿ�̾,*,*,*,*,*
+EOS
+^C
+kazuyuki@VISION:~$ sudo apt install mecab-ipadic-utf8
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  mecab-ipadic
+The following NEW packages will be installed:
+  mecab-ipadic mecab-ipadic-utf8
+0 upgraded, 2 newly installed, 0 to remove and 336 not upgraded.
+Need to get 12.1 MB of archives.
+After this operation, 54.4 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://jp.archive.ubuntu.com/ubuntu xenial/universe amd64 mecab-ipadic all 2.7.0-20070801+main-1 [12.1 MB]
+Get:2 http://jp.archive.ubuntu.com/ubuntu xenial/universe amd64 mecab-ipadic-utf8 all 2.7.0-20070801+main-1 [3,522 B]
+Fetched 12.1 MB in 30s (395 kB/s)                                              
+Selecting previously unselected package mecab-ipadic.
+(Reading database ... 210221 files and directories currently installed.)
+Preparing to unpack .../mecab-ipadic_2.7.0-20070801+main-1_all.deb ...
+Unpacking mecab-ipadic (2.7.0-20070801+main-1) ...
+Selecting previously unselected package mecab-ipadic-utf8.
+Preparing to unpack .../mecab-ipadic-utf8_2.7.0-20070801+main-1_all.deb ...
+Unpacking mecab-ipadic-utf8 (2.7.0-20070801+main-1) ...
+Setting up mecab-ipadic (2.7.0-20070801+main-1) ...
+Compiling IPA dictionary for Mecab.  This takes long time...
+reading /usr/share/mecab/dic/ipadic/unk.def ... 40
+emitting double-array: 100% |###########################################| 
+/usr/share/mecab/dic/ipadic/model.def is not found. skipped.
+reading /usr/share/mecab/dic/ipadic/Noun.csv ... 60477
+reading /usr/share/mecab/dic/ipadic/Postp.csv ... 146
+reading /usr/share/mecab/dic/ipadic/Noun.number.csv ... 42
+reading /usr/share/mecab/dic/ipadic/Adnominal.csv ... 135
+reading /usr/share/mecab/dic/ipadic/Noun.proper.csv ... 27327
+reading /usr/share/mecab/dic/ipadic/Postp-col.csv ... 91
+reading /usr/share/mecab/dic/ipadic/Noun.demonst.csv ... 120
+reading /usr/share/mecab/dic/ipadic/Filler.csv ... 19
+reading /usr/share/mecab/dic/ipadic/Noun.name.csv ... 34202
+reading /usr/share/mecab/dic/ipadic/Noun.others.csv ... 151
+reading /usr/share/mecab/dic/ipadic/Suffix.csv ... 1393
+reading /usr/share/mecab/dic/ipadic/Others.csv ... 2
+reading /usr/share/mecab/dic/ipadic/Noun.adjv.csv ... 3328
+reading /usr/share/mecab/dic/ipadic/Noun.verbal.csv ... 12146
+reading /usr/share/mecab/dic/ipadic/Noun.nai.csv ... 42
+reading /usr/share/mecab/dic/ipadic/Interjection.csv ... 252
+reading /usr/share/mecab/dic/ipadic/Auxil.csv ... 199
+reading /usr/share/mecab/dic/ipadic/Noun.adverbal.csv ... 795
+reading /usr/share/mecab/dic/ipadic/Adj.csv ... 27210
+reading /usr/share/mecab/dic/ipadic/Noun.place.csv ... 72999
+reading /usr/share/mecab/dic/ipadic/Prefix.csv ... 221
+reading /usr/share/mecab/dic/ipadic/Conjunction.csv ... 171
+reading /usr/share/mecab/dic/ipadic/Adverb.csv ... 3032
+reading /usr/share/mecab/dic/ipadic/Symbol.csv ... 208
+reading /usr/share/mecab/dic/ipadic/Verb.csv ... 130750
+reading /usr/share/mecab/dic/ipadic/Noun.org.csv ... 16668
+emitting double-array: 100% |###########################################| 
+reading /usr/share/mecab/dic/ipadic/matrix.def ... 1316x1316
+emitting matrix      : 100% |###########################################| 
+
+done!
+update-alternatives: using /var/lib/mecab/dic/ipadic to provide /var/lib/mecab/dic/debian (mecab-dictionary) in auto mode
+Setting up mecab-ipadic-utf8 (2.7.0-20070801+main-1) ...
+Compiling IPA dictionary for Mecab.  This takes long time...
+reading /usr/share/mecab/dic/ipadic/unk.def ... 40
+emitting double-array: 100% |###########################################| 
+/usr/share/mecab/dic/ipadic/model.def is not found. skipped.
+reading /usr/share/mecab/dic/ipadic/Noun.csv ... 60477
+reading /usr/share/mecab/dic/ipadic/Postp.csv ... 146
+reading /usr/share/mecab/dic/ipadic/Noun.number.csv ... 42
+reading /usr/share/mecab/dic/ipadic/Adnominal.csv ... 135
+reading /usr/share/mecab/dic/ipadic/Noun.proper.csv ... 27327
+reading /usr/share/mecab/dic/ipadic/Postp-col.csv ... 91
+reading /usr/share/mecab/dic/ipadic/Noun.demonst.csv ... 120
+reading /usr/share/mecab/dic/ipadic/Filler.csv ... 19
+reading /usr/share/mecab/dic/ipadic/Noun.name.csv ... 34202
+reading /usr/share/mecab/dic/ipadic/Noun.others.csv ... 151
+reading /usr/share/mecab/dic/ipadic/Suffix.csv ... 1393
+reading /usr/share/mecab/dic/ipadic/Others.csv ... 2
+reading /usr/share/mecab/dic/ipadic/Noun.adjv.csv ... 3328
+reading /usr/share/mecab/dic/ipadic/Noun.verbal.csv ... 12146
+reading /usr/share/mecab/dic/ipadic/Noun.nai.csv ... 42
+reading /usr/share/mecab/dic/ipadic/Interjection.csv ... 252
+reading /usr/share/mecab/dic/ipadic/Auxil.csv ... 199
+reading /usr/share/mecab/dic/ipadic/Noun.adverbal.csv ... 795
+reading /usr/share/mecab/dic/ipadic/Adj.csv ... 27210
+reading /usr/share/mecab/dic/ipadic/Noun.place.csv ... 72999
+reading /usr/share/mecab/dic/ipadic/Prefix.csv ... 221
+reading /usr/share/mecab/dic/ipadic/Conjunction.csv ... 171
+reading /usr/share/mecab/dic/ipadic/Adverb.csv ... 3032
+reading /usr/share/mecab/dic/ipadic/Symbol.csv ... 208
+reading /usr/share/mecab/dic/ipadic/Verb.csv ... 130750
+reading /usr/share/mecab/dic/ipadic/Noun.org.csv ... 16668
+emitting double-array: 100% |###########################################| 
+reading /usr/share/mecab/dic/ipadic/matrix.def ... 1316x1316
+emitting matrix      : 100% |###########################################| 
+
+done!
+update-alternatives: using /var/lib/mecab/dic/ipadic-utf8 to provide /var/lib/mecab/dic/debian (mecab-dictionary) in auto mode
+kazuyuki@VISION:~$ macab
+No command 'macab' found, did you mean:
+ Command 'mecab' from package 'mecab' (universe)
+macab: command not found
+kazuyuki@VISION:~$ mecab
+I'm a girl
+I	名詞,固有名詞,組織,*,*,*,*
+'	名詞,サ変接続,*,*,*,*,*
+m	名詞,一般,*,*,*,*,*
+a	名詞,一般,*,*,*,*,*
+girl	名詞,固有名詞,組織,*,*,*,*
+EOS
+私は猿より賢い
+私	名詞,代名詞,一般,*,*,*,私,ワタシ,ワタシ
+は	助詞,係助詞,*,*,*,*,は,ハ,ワ
+猿	名詞,一般,*,*,*,*,猿,サル,サル
+より	助詞,格助詞,一般,*,*,*,より,ヨリ,ヨリ
+賢い	形容詞,自立,*,*,形容詞・アウオ段,基本形,賢い,カシコイ,カシコイ
+EOS
+^C
+kazuyuki@VISION:~$ pip install MaCab
+Collecting MaCab
+  Could not find a version that satisfies the requirement MaCab (from versions: )
+No matching distribution found for MaCab
+kazuyuki@VISION:~$ sudo apt install python-mecab
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following NEW packages will be installed:
+  python-mecab
+0 upgraded, 1 newly installed, 0 to remove and 336 not upgraded.
+Need to get 36.1 kB of archives.
+After this operation, 156 kB of additional disk space will be used.
+Get:1 http://jp.archive.ubuntu.com/ubuntu xenial/universe amd64 python-mecab amd64 0.99.6-1build2 [36.1 kB]
+Fetched 36.1 kB in 0s (48.1 kB/s)       
+Selecting previously unselected package python-mecab.
+(Reading database ... 210266 files and directories currently installed.)
+Preparing to unpack .../python-mecab_0.99.6-1build2_amd64.deb ...
+Unpacking python-mecab (0.99.6-1build2) ...
+Setting up python-mecab (0.99.6-1build2) ...
+kazuyuki@VISION:~$ pip install mecab-python3
+Collecting mecab-python3
+  Using cached mecab-python3-0.7.tar.gz
+    Complete output from command python setup.py egg_info:
+    /bin/sh: 1: mecab-config: not found
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/tmp/pip-build-40aowpcr/mecab-python3/setup.py", line 41, in <module>
+        include_dirs=cmd2("mecab-config --inc-dir"),
+      File "/tmp/pip-build-40aowpcr/mecab-python3/setup.py", line 21, in cmd2
+        return cmd1(strings).split()
+      File "/tmp/pip-build-40aowpcr/mecab-python3/setup.py", line 18, in cmd1
+        return os.popen(strings).readlines()[0][:-1]
+    IndexError: list index out of range
+    
+    ----------------------------------------
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-40aowpcr/mecab-python3/
+kazuyuki@VISION:~$ pip install mecab-python3
+Collecting mecab-python3
+  Using cached mecab-python3-0.7.tar.gz
+    Complete output from command python setup.py egg_info:
+    /bin/sh: 1: mecab-config: not found
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/tmp/pip-build-qky0xsd_/mecab-python3/setup.py", line 41, in <module>
+        include_dirs=cmd2("mecab-config --inc-dir"),
+      File "/tmp/pip-build-qky0xsd_/mecab-python3/setup.py", line 21, in cmd2
+        return cmd1(strings).split()
+      File "/tmp/pip-build-qky0xsd_/mecab-python3/setup.py", line 18, in cmd1
+        return os.popen(strings).readlines()[0][:-1]
+    IndexError: list index out of range
+    
+    ----------------------------------------
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-qky0xsd_/mecab-python3/
+kazuyuki@VISION:~$ easy_install mecab-python3
+Searching for mecab-python3
+Reading https://pypi.python.org/simple/mecab-python3/
+Downloading https://pypi.python.org/packages/25/e9/bbf5fc790a2bedd96fbaf47a84afa060bfb0b3e0217e5f64b32bd4bbad69/mecab-python3-0.7.tar.gz#md5=9f743b0ab15142e3d6c4fe26d1c2c3d8
+Best match: mecab-python3 0.7
+Processing mecab-python3-0.7.tar.gz
+Writing /tmp/easy_install-frdjv8d7/mecab-python3-0.7/setup.cfg
+Running mecab-python3-0.7/setup.py -q bdist_egg --dist-dir /tmp/easy_install-frdjv8d7/mecab-python3-0.7/egg-dist-tmp-9hhfc8_r
+/bin/sh: 1: mecab-config: not found
+Traceback (most recent call last):
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 156, in save_modules
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 197, in setup_context
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 246, in run_setup
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 276, in run
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 245, in runner
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 47, in _execfile
+  File "/tmp/easy_install-frdjv8d7/mecab-python3-0.7/setup.py", line 41, in <module>
+  File "/tmp/easy_install-frdjv8d7/mecab-python3-0.7/setup.py", line 21, in cmd2
+  File "/tmp/easy_install-frdjv8d7/mecab-python3-0.7/setup.py", line 18, in cmd1
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kazuyuki/anaconda3/bin/easy_install", line 6, in <module>
+    sys.exit(setuptools.command.easy_install.main())
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/command/easy_install.py", line 2274, in main
+  File "/home/kazuyuki/anaconda3/lib/python3.6/distutils/core.py", line 148, in setup
+    dist.run_commands()
+  File "/home/kazuyuki/anaconda3/lib/python3.6/distutils/dist.py", line 955, in run_commands
+    self.run_command(cmd)
+  File "/home/kazuyuki/anaconda3/lib/python3.6/distutils/dist.py", line 974, in run_command
+    cmd_obj.run()
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/command/easy_install.py", line 409, in run
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/command/easy_install.py", line 664, in easy_install
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/command/easy_install.py", line 694, in install_item
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/command/easy_install.py", line 875, in install_eggs
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/command/easy_install.py", line 1114, in build_and_install
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/command/easy_install.py", line 1100, in run_setup
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 249, in run_setup
+  File "/home/kazuyuki/anaconda3/lib/python3.6/contextlib.py", line 100, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 197, in setup_context
+  File "/home/kazuyuki/anaconda3/lib/python3.6/contextlib.py", line 100, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 168, in save_modules
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 143, in resume
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/pkg_resources/_vendor/six.py", line 685, in reraise
+    raise value.with_traceback(tb)
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 156, in save_modules
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 197, in setup_context
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 246, in run_setup
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 276, in run
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 245, in runner
+  File "/home/kazuyuki/anaconda3/lib/python3.6/site-packages/setuptools-27.2.0-py3.6.egg/setuptools/sandbox.py", line 47, in _execfile
+  File "/tmp/easy_install-frdjv8d7/mecab-python3-0.7/setup.py", line 41, in <module>
+  File "/tmp/easy_install-frdjv8d7/mecab-python3-0.7/setup.py", line 21, in cmd2
+  File "/tmp/easy_install-frdjv8d7/mecab-python3-0.7/setup.py", line 18, in cmd1
+IndexError: list index out of range
+kazuyuki@VISION:~$ pip install mecab-python3
+Collecting mecab-python3
+  Using cached mecab-python3-0.7.tar.gz
+    Complete output from command python setup.py egg_info:
+    /bin/sh: 1: mecab-config: not found
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/tmp/pip-build-06slznsi/mecab-python3/setup.py", line 41, in <module>
+        include_dirs=cmd2("mecab-config --inc-dir"),
+      File "/tmp/pip-build-06slznsi/mecab-python3/setup.py", line 21, in cmd2
+        return cmd1(strings).split()
+      File "/tmp/pip-build-06slznsi/mecab-python3/setup.py", line 18, in cmd1
+        return os.popen(strings).readlines()[0][:-1]
+    IndexError: list index out of range
+    
+    ----------------------------------------
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-06slznsi/mecab-python3/
+kazuyuki@VISION:~$ sudo apt install libmecab-dev
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following NEW packages will be installed:
+  libmecab-dev
+0 upgraded, 1 newly installed, 0 to remove and 336 not upgraded.
+Need to get 313 kB of archives.
+After this operation, 3,261 kB of additional disk space will be used.
+Get:1 http://jp.archive.ubuntu.com/ubuntu xenial/universe amd64 libmecab-dev amd64 0.996-1.2ubuntu1 [313 kB]
+Fetched 313 kB in 1s (237 kB/s)       
+Selecting previously unselected package libmecab-dev.
+(Reading database ... 210274 files and directories currently installed.)
+Preparing to unpack .../libmecab-dev_0.996-1.2ubuntu1_amd64.deb ...
+Unpacking libmecab-dev (0.996-1.2ubuntu1) ...
+Processing triggers for man-db (2.7.5-1) ...
+Setting up libmecab-dev (0.996-1.2ubuntu1) ...
+kazuyuki@VISION:~$ pip install mecab-python3
+Collecting mecab-python3
+  Using cached mecab-python3-0.7.tar.gz
+Building wheels for collected packages: mecab-python3
+  Running setup.py bdist_wheel for mecab-python3 ... done
+  Stored in directory: /home/kazuyuki/.cache/pip/wheels/6f/0e/eb/962d0d0c1ed7e2e03b9ff2ed186ab3034053b0e970cd04005c
+Successfully built mecab-python3
+Installing collected packages: mecab-python3
+Successfully installed mecab-python3-0.7
+kazuyuki@VISION:~$ pip install libgcc
+Collecting libgcc
+  Could not find a version that satisfies the requirement libgcc (from versions: )
+No matching distribution found for libgcc
+kazuyuki@VISION:~$ conda install libgcc
+Fetching package metadata .........
+Solving package specifications: .
+
+Package plan for installation in environment /home/kazuyuki/anaconda3:
+
+The following packages will be UPDATED:
+
+    anaconda: 4.4.0-np112py36_0 --> custom-py36_0
+    conda:    4.3.21-py36_0     --> 4.3.22-py36_0
+    libgcc:   4.8.5-2           --> 5.2.0-0      
+
+Proceed ([y]/n)? y
+
+libgcc-5.2.0-0 100% |################################| Time: 0:00:03 351.67 kB/s
+anaconda-custo 100% |################################| Time: 0:00:00   1.82 MB/s
+conda-4.3.22-p 100% |################################| Time: 0:00:00 630.27 kB/s
+kazuyuki@VISION:~$ python
+Python 3.6.1 |Anaconda custom (64-bit)| (default, May 11 2017, 13:09:58) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import MeCab
+
+kazuyuki@VISION:~$ python
+Python 3.6.1 |Anaconda custom (64-bit)| (default, May 11 2017, 13:09:58) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import MeCab
+>>> 
+KeyboardInterrupt
+>>> 
+KeyboardInterrupt
+>>> python
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'python' is not defined
+>>> import MeCab
+>>> macab = MaCab.Tagger("-Ochasen")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'MaCab' is not defined
+>>> macab = MeCab.Tagger("-Ochasen")
+>>> print(mecab.parse("私はとても変態です"))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'mecab' is not defined
+>>> print(macab.parse("私はとても変態です"))
+私	ワタシ	私	名詞-代名詞-一般		
+は	ハ	は	助詞-係助詞		
+とても	トテモ	とても	副詞-助詞類接続		
+変態	ヘンタイ	変態	名詞-サ変接続		
+です	デス	です	助動詞	特殊・デス	基本形
+EOS
+
+>>> 
+
+"""

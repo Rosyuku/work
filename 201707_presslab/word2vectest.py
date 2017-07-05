@@ -9,6 +9,8 @@ Created on Wed Jun 28 22:27:24 2017
 
 import MeCab
 
-mecab = MeCab.Tagger("-Ochasen")
-
-mecab = MeCab.Tagger("mecabrc")
+if __name__ == "__main__":
+    
+    mecab = MeCab.Tagger("-Ochasen")
+    mecab = MeCab.Tagger("mecabrc")
+    print(mecab.parse("MecabをインストールしてPythonから使ってみた"))
